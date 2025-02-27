@@ -19,7 +19,7 @@ jobs:
           run: sudo apt-get -y install cmake
 
         - name: create build dir
-          run: cmake -E make_directory ${{github.workspace}}/build
+          run: cmake -E make_directory ${{github.workspace}}/build && ls
 
         - name: configure build
           run: |
