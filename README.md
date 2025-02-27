@@ -2,6 +2,9 @@
 
 A minimal code generation library featuring lightweight, high level IR, x86-64 backend with simple extensible design and zero dependency.
 
+> [!!INFORMATION]
+> This project will not get continued as it is made for learning purposes
+
 ## Usage
 
 ```cpp

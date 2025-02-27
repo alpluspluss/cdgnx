@@ -12,3 +12,16 @@ target_include_directories(cdgnx PUBLIC
         $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
         $<INSTALL_INTERFACE:include>
 )
+
+add_executable(cdgnx-test 
+        tests/test_main.cpp
+)
+
+target_include_directories(cdgnx-test PRIVATE
+        $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
+        $<INSTALL_INTERFACE:include>
+)
+
+target_link_libraries(cdgnx-test PRIVATE
+        cdgnx
+)

@@ -125,8 +125,8 @@ namespace cdgnx::backend
             {
                 gen(n->kids[0].get());
                 gen(n->kids[1].get());
-                emit("popq %rcx"); // divisor
-                emit("popq %rax"); // dividend
+                emit("popq %rcx"); /* divisor */
+                emit("popq %rax"); /* dividend */
                 emit("xorq %rdx, %rdx");
                 emit("idivq %rcx");
                 emit("pushq %rax");
@@ -137,8 +137,10 @@ namespace cdgnx::backend
             {
                 gen(n->kids[0].get());
                 gen(n->kids[1].get());
-                emit("popq %rcx"); // divisor
-                emit("popq %rax"); // dividend
+
+                /* similar to IDIV... */
+                emit("popq %rcx");
+                emit("popq %rax");
                 emit("xorq %rdx, %rdx");
                 emit("idivq %rcx");
                 emit("pushq %rdx");
@@ -391,7 +393,6 @@ namespace cdgnx::backend
                  * x86_64 doesn't have a direct floating-point modulo
                  * so we'll use FPU for this
                  */
-                emit("// Floating point modulo - complex implementation");
                 gen(n->kids[0].get());
                 gen(n->kids[1].get());
                 emit("fldl 8(%rsp)"); /* load first value */
