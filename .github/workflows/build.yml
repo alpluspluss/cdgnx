@@ -34,4 +34,4 @@ jobs:
         
         - name: test
           working-directory: ./build
-          run: ctest --output-on-failure -C ${{ matrix.build_type }}
+          run: ./cdgnx-test
