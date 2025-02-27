@@ -1,6 +1,6 @@
 name: ci
 
-on: [ push, pull_request ]
+on: [push, pull_request]
 
 jobs:
   build:
@@ -9,8 +9,8 @@ jobs:
     strategy:
         fail-fast: false
         matrix:
-            os: [ ubuntu-latest ]
-            build_type: [ Release ]
+            os: [ubuntu-latest]
+            build_type: [Release]
 
     steps:
         - uses: actions/checkout@v4
@@ -19,16 +19,19 @@ jobs:
           run: sudo apt-get -y install cmake
 
         - name: create build dir
-          run: cmake -E make_directory ./build && ls && cd build
+          run: cmake -E make_directory ./build
 
         - name: configure build
+          working-directory: ./build
           run: |
             cmake .. \
-                -DCMAKE_BUILD_TYPE=${{ matrix.build_type }}\
+                -DCMAKE_BUILD_TYPE=${{ matrix.build_type }} \
                 -DBUILD_TESTS=ON
                 
         - name: build
+          working-directory: ./build
           run: cmake --build . --config ${{ matrix.build_type }}
         
         - name: test
-          run: ./cdgnx-test
+          working-directory: ./build
+          run: ctest --output-on-failure -C ${{ matrix.build_type }}
