@@ -19,13 +19,13 @@ jobs:
           run: sudo apt-get -y install cmake
 
         - name: create build dir
-          run: cmake -E make_directory ${{github.workspace}}/build && ls
+          run: cmake -E make_directory ./build && ls && cd build
 
         - name: configure build
           run: |
             cmake .. \
                 -DCMAKE_BUILD_TYPE=${{ matrix.build_type }}\
-                -BBUILD_TESTS=ON
+                -DBUILD_TESTS=ON
                 
         - name: build
           run: cmake --build . --config ${{ matrix.build_type }}
